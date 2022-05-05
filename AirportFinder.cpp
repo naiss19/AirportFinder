@@ -65,22 +65,13 @@ AirportFinder::AirportFinder(char *username, char *password)
 {
     this->username = username; // intializing the name
     this->password = password;
-    mysqlpp::Connection myDB("cse278", "localhost", username,
-                             password);
 
     // Accessing the miamioh server
     // ----------------------------------------------------------------------------------
 
     // ----------------------------------------------------------------------------------
     // from th SQL1.cpp
-    mysqlpp::Connection myDB("cse278", "localhost", username,
-                             password);
-    Query query = myDB.query();
-    query << "SELECT pname, price, category, manufacturer FROM AirportFinder;";
-    query.parse(); // check to ensure query is correct
-    // Run the query and get stored results
-    StoreQueryResult result = query.store();
-    ////from th SQL1.cpp
+    menu();
 
     //===========================================================================
 }
@@ -96,9 +87,12 @@ AirportFinder::~AirportFinder()
 // Helper functions
 void AirportFinder::getAirport()
 {
+    Query query = myDB.query();
+    mysqlpp::StoreQueryResult outcome = query.store();
 }
 void AirportFinder::sortBy()
 {
+    Query query = myDB.query();
 }
 // Operator overloading
 ofstream &AirportFinder::operator<<(ofstream &is)
@@ -108,15 +102,14 @@ ofstream &AirportFinder::operator<<(ofstream &is)
 // Find airports in Germany by city
 void AirportFinder::germanAirports() // Menu option 1  ONE COLUMN
 {
-    mysqlpp::Connection myDB("cse278", "localhost", username,
-                             password);
+
     Query query = myDB.query();
-    string place;                                 // city
-    cout << "Find airports in Germany by city\n"; //  print statement
-    cin >> place;                                 //  city
-    query << "SELECT Name FROM AirportFinder;";   // SQL CODE
-    query << "WHERE City = %0;";                  //  SQL CODE second part
-    query.parse();                                // check to ensure query is correct
+    string place;                                                 // city
+    cout << "Find airports in Germany by city\n";                 //  print statement
+    cin >> place;                                                 //  city
+    query << "SELECT Name FROM AirportFinder;";                   // SQL CODE
+    query << "WHERE City = " << quote_only << place << "LIMIT 5;"; //  SQL CODE second part
+    query.parse();                                                // check to ensure query is correct
     // Run the query and get stored results
     mysqlpp::StoreQueryResult outcome = query.store();
 
@@ -125,15 +118,15 @@ void AirportFinder::germanAirports() // Menu option 1  ONE COLUMN
 void AirportFinder::twoCriteria() // Menu option 2  TWO COLUMNS
 {
     // show a column here and then ask them to chose from that  suggestion
-    mysqlpp::Connection myDB("cse278", "localhost", username,
-                             password);
     Query query = myDB.query();
-    string ariport;                                    //  airport name
-    cout << "Enter a name of a airport in the city\n"; //  print statement
-    cin >> ariport;                                    //  taking in specific airport
-
-    query << "SELECT Name, City, Latitude, Longitude FROM AirportFinder;"; //  SQL CODE
-    query << "WHERE Name = %0;";                                           //  SQL CODE second part
+    string country;
+    string timezone;
+    cout << "Enter a country and time zone\n";
+    cout << "Example: America America/Pacific \n      Iceland Atlantic/Reykjavik" << endl; //  print statement
+    cin >> country;
+    cin >> timezone;  //  taking in specific airport
+    query << "SELECT Name, City, Latitude, Longitude FROM AirportFinder WHERE Country = " << country << " AND Tz = " << timezone << ";";
+    // "WHERE Name = %0;";                                           //  SQL CODE second part
     query.parse();                                                         // check to ensure query is correct
     // Run the query and get stored results
     mysqlpp::StoreQueryResult outcome = query.store();

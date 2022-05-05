@@ -35,6 +35,8 @@ private:
     char *password = "PGF*zMbvY.u2p.DT";
     char *serverName = "hallbd4@ceclnx01.cec.miamioh.edu";
     void makeMenu();
+    mysqlpp::Connection myDB = new Connection("cse278", "localhost", username,
+                             password);
 };
 
 #endif
