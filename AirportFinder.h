@@ -1,3 +1,4 @@
+#define LIBSSH_STATIC 1
 #ifndef AIRPORTFINDER_H
 #define AIRPORTFINDER_H
 #include <string>
@@ -10,6 +11,7 @@ using std::cout;
 using std::cin;
 using std::endl;
 using std::ofstream;
+using mysqlpp::StoreQueryResult;
 
 
 class AirportFinder 
@@ -17,7 +19,9 @@ class AirportFinder
 
 public:
 void menu();
+void print(StoreQueryResult outcome);
 AirportFinder();
+AirportFinder(char* username, char* password);
 ~AirportFinder();
 void getAirport();
 void sortBy();
@@ -27,9 +31,11 @@ void twoCriteria(); //Menu option 2
 void sumAirports(); //Menu option 3
 void groupAirports(); //Menu option 4
 void exitQuery(); //Menu option 5
+
 private:
-string username;
-string password;
+char* username = "hallbd4";
+char* password = "PGF*zMbvY.u2p.DT";
+char* serverName = "hallbd4@ceclnx01.cec.miamioh.edu";
 void makeMenu();
 
 };
