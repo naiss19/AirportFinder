@@ -6,180 +6,175 @@
 #include <mysql++.h>
 
 using namespace mysqlpp;
+using std::cin;
 using std::cout;
 using std::endl;
-using std::cin;
 
-//think you need this 
-void AirportFinder::menu() {
+// think you need this
+void AirportFinder::menu()
+{
     int userInput;
     cout << "Choose an item from the menu" << endl;
     makeMenu();
     cin >> userInput;
-    switch(userInput) {
-        case 1:
+    switch (userInput)
+    {
+    case 1:
         germanAirports();
-        break; 
-        case 2:
+        break;
+    case 2:
         twoCriteria();
-        break; 
-        case 3:
+        break;
+    case 3:
         sumAirports();
-        break; 
-        case 4:
+        break;
+    case 4:
         groupAirports();
-        break; 
-        case 5:
+        break;
+    case 5:
         exitQuery();
-        break; 
-        default:
+        break;
+    default:
         cout << "Please choose another number" << endl;
         menu();
         break;
     }
 }
-//print the DB
-void AirportFinder::print(StoreQueryResult outcome) {
- // Results is a 2D vector of mysqlpp::String objects.
+// print the DB
+void AirportFinder::print(StoreQueryResult outcome)
+{
+    // Results is a 2D vector of mysqlpp::String objects.
     // Print the results.
-    for (const auto& row : outcome) {
-        for (const auto& col : row) {
+    for (const auto &row : outcome)
+    {
+        for (const auto &col : row)
+        {
             std::cout << col << "\t";
         }
         std::cout << std::endl;
     }
 }
-//Constructor
-AirportFinder::AirportFinder() {
+// Constructor
+AirportFinder::AirportFinder()
+{
 
-AirportFinder(username, password);
-
+    AirportFinder(username, password);
 }
 
-AirportFinder::AirportFinder(char* username, char* password) {
-this->username = username;//intializing the name
-this->password = password;
-mysqlpp::Connection myDB("cse278", "localhost", username,
-            password);
+AirportFinder::AirportFinder(char *username, char *password)
+{
+    this->username = username; // intializing the name
+    this->password = password;
+    mysqlpp::Connection myDB("cse278", "localhost", username,
+                             password);
 
-// Accessing the miamioh server
-// ----------------------------------------------------------------------------------
+    // Accessing the miamioh server
+    // ----------------------------------------------------------------------------------
 
-
-// ----------------------------------------------------------------------------------
-//from th SQL1.cpp 
-mysqlpp::Connection myDB("cse278", "localhost", username,
-            password);
+    // ----------------------------------------------------------------------------------
+    // from th SQL1.cpp
+    mysqlpp::Connection myDB("cse278", "localhost", username,
+                             password);
     Query query = myDB.query();
     query << "SELECT pname, price, category, manufacturer FROM AirportFinder;";
-    query.parse();  // check to ensure query is correct
+    query.parse(); // check to ensure query is correct
     // Run the query and get stored results
     StoreQueryResult result = query.store();
-    ////from th SQL1.cpp 
+    ////from th SQL1.cpp
 
-//===========================================================================
+    //===========================================================================
 }
-//Destructor
-AirportFinder::~AirportFinder() {
-  //  delete this->AirportFinder;
-delete username;
-delete password;
-delete serverName;
-cout << "Thank you for using Airport Finder" << endl;
-
-
-}
-//Helper functions
-void AirportFinder::getAirport() {
-    
-    
-
-}
-void AirportFinder::sortBy() {
-
-}
-//Operator overloading
-ofstream& AirportFinder::operator<< (ofstream& is) {
-
-}
-
-//Find airports in Germany by city
-void AirportFinder::germanAirports() //Menu option 1  ONE COLUMN
+// Destructor
+AirportFinder::~AirportFinder()
 {
-mysqlpp::Connection myDB("cse278", "localhost", username,
-            password);
+    //  delete this->AirportFinder;
+    delete username;
+    delete password;
+    delete serverName;
+    cout << "Thank you for using Airport Finder" << endl;
+}
+// Helper functions
+void AirportFinder::getAirport()
+{
+}
+void AirportFinder::sortBy()
+{
+}
+// Operator overloading
+ofstream &AirportFinder::operator<<(ofstream &is)
+{
+}
+
+// Find airports in Germany by city
+void AirportFinder::germanAirports() // Menu option 1  ONE COLUMN
+{
+    mysqlpp::Connection myDB("cse278", "localhost", username,
+                             password);
     Query query = myDB.query();
-string place; // city
-cout<< "Find airports in Germany by city\n";  //  print statement
-cin >> place;  //  city
-  query << "SELECT Name FROM AirportFinder;"; //SQL CODE
-   query << "WHERE City = %0;";                                                //  SQL CODE second part
-    query.parse();  // check to ensure query is correct
+    string place;                                 // city
+    cout << "Find airports in Germany by city\n"; //  print statement
+    cin >> place;                                 //  city
+    query << "SELECT Name FROM AirportFinder;";   // SQL CODE
+    query << "WHERE City = %0;";                  //  SQL CODE second part
+    query.parse();                                // check to ensure query is correct
     // Run the query and get stored results
     mysqlpp::StoreQueryResult outcome = query.store();
 
-
-    ///need to make method to only print one column NOW 
-
-
+    /// need to make method to only print one column NOW
 }
-void AirportFinder::twoCriteria() //Menu option 2  TWO COLUMNS
+void AirportFinder::twoCriteria() // Menu option 2  TWO COLUMNS
 {
-// show a column here and then ask them to chose from that  suggestion 
-mysqlpp::Connection myDB("cse278", "localhost", username,
-            password);
+    // show a column here and then ask them to chose from that  suggestion
+    mysqlpp::Connection myDB("cse278", "localhost", username,
+                             password);
     Query query = myDB.query();
-    string ariport;  //  airport name 
-cout<< "Enter a name of a airport in the city\n";  //  print statement 
-cin>> ariport; //  taking in specific airport  
+    string ariport;                                    //  airport name
+    cout << "Enter a name of a airport in the city\n"; //  print statement
+    cin >> ariport;                                    //  taking in specific airport
 
-  query << "SELECT Name, City, Latitude, Longitude FROM AirportFinder;"; //  SQL CODE
-   query << "WHERE Name = %0;";                                          //  SQL CODE second part 
-    query.parse();  // check to ensure query is correct
+    query << "SELECT Name, City, Latitude, Longitude FROM AirportFinder;"; //  SQL CODE
+    query << "WHERE Name = %0;";                                           //  SQL CODE second part
+    query.parse();                                                         // check to ensure query is correct
     // Run the query and get stored results
     mysqlpp::StoreQueryResult outcome = query.store();
 
-
-    ///need to make method to only print 2 column NOW 
-
-
+    /// need to make method to only print 2 column NOW
 }
-void AirportFinder::sumAirports()  //  Menu option 3
+void AirportFinder::sumAirports() //  Menu option 3
 {
-mysqlpp::Connection myDB("cse278", "localhost", username,
-            password);
+    mysqlpp::Connection myDB("cse278", "localhost", username,
+                             password);
     Query query = myDB.query();
-  query << "SELECT City , COUNT(*) FROM AirportFinder;"; //SQL CODE
-   query << "WHERE COUNTRY = 'GERMANY'";                                                //SQL CODE second party 
-   query << "GROUP BY City";
-    query.parse();  // check to ensure query is correct
+    query << "SELECT City , COUNT(*) FROM AirportFinder;"; // SQL CODE
+    query << "WHERE COUNTRY = 'GERMANY'";                  // SQL CODE second party
+    query << "GROUP BY City";
+    query.parse(); // check to ensure query is correct
     // Run the query and get stored results
     mysqlpp::StoreQueryResult outcome = query.store();
-
 }
 //===================================================================================
 //                  I stopped here
 //==================================================================================
-void AirportFinder::groupAirports()  //  Menu option 4
+void AirportFinder::groupAirports() //  Menu option 4
 {
-mysqlpp::Connection myDB("cse278", "localhost", username,
-            password);
+    mysqlpp::Connection myDB("cse278", "localhost", username,
+                             password);
     Query query = myDB.query();
-//did not finish will work on it TOMORROW 
-    query << "SELECT name , COUNT(*) FROM AirportFinder;"; //SQL CODE
-   query << "WHERE COUNTRY = 'GERMANY'";                                                //SQL CODE second party 
-   query << "GROUP BY City";
-    query.parse();  // check to ensure query is correct
+    // did not finish will work on it TOMORROW
+    query << "SELECT name , COUNT(*) FROM AirportFinder;"; // SQL CODE
+    query << "WHERE COUNTRY = 'GERMANY'";                  // SQL CODE second party
+    query << "GROUP BY City";
+    query.parse(); // check to ensure query is correct
     // Run the query and get stored results
     mysqlpp::StoreQueryResult outcome = query.store();
-
 }
-int exitQuery()  //  Menu option 5
+int exitQuery() //  Menu option 5
 {
     return 0;
 }
 
-void AirportFinder::makeMenu() {
+void AirportFinder::makeMenu()
+{
     cout << "Airport Finder Menu:" << endl;
     cout << "--------------------------------------------------" << endl;
     cout << "Option 1: Select all airports in the United States by city" << endl;
@@ -188,4 +183,3 @@ void AirportFinder::makeMenu() {
     cout << "Option 4: Summarize using grouping" << endl;
     cout << "Option 5: Exit" << endl;
 }
-
