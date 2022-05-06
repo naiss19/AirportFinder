@@ -1,3 +1,4 @@
+#define MYSQLPP_MYSQL_HEADERS_BURIED
 #ifndef AIRPORTFINDER_H
 #define AIRPORTFINDER_H
 #include <string>
@@ -19,11 +20,11 @@ public:
     void menu();
     void print(StoreQueryResult outcome);
     AirportFinder();
-    AirportFinder(char *username, char *password);
+    // AirportFinder();
     ~AirportFinder();
     void getAirport();
     void sortBy();
-    ofstream &operator<<(ofstream &is);
+    // ofstream &operator<<(ofstream &is);
     void germanAirports(); // Menu option 1
     void twoCriteria();    // Menu option 2
     void sumAirports();    // Menu option 3
@@ -31,6 +32,8 @@ public:
     void exitQuery();      // Menu option 5
 
 private:
+   // Connect to database with: database, server, userID, password
+ // mysqlpp::Connection myDB;  dont need declare in each function
     void makeMenu();
 };
 

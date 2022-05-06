@@ -1,0 +1,34 @@
+PS C:\Users\School Wayne\Desktop\Junior Year\CSE278\HW> cd HW4
+PS C:\Users\School Wayne\Desktop\Junior Year\CSE278\HW\HW4> ls
+
+
+    Directory: C:\Users\School Wayne\Desktop\Junior Year\CSE278\HW\HW4
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----          5/5/2022   2:17 PM                .vscode
+d-----          5/5/2022  11:16 AM                libssh
+d-----          5/5/2022  11:16 AM                mysqlpp
+-a----          5/5/2022  11:16 AM           8196 .DS_Store
+-a----          5/5/2022  11:16 AM           6087 AirportFinder.cpp
+-a----          5/5/2022  11:16 AM            913 AirportFinder.h
+-a----          5/5/2022   2:17 PM           4784 hold.cpp
+-a----          5/5/2022  11:16 AM            120 main.cpp
+-a----          5/5/2022  11:16 AM            916 sql1.cpp
+-a----          5/5/2022  11:16 AM           1032 sql2.cpp
+-a----          5/5/2022  11:16 AM           1063 sql3.cpp
+
+
+PS C:\Users\School Wayne\Desktop\Junior Year\CSE278\HW\HW4> scp main.cpp chaneyv@ceclnx01.cec.miamioh.edu:~/
+chaneyv@ceclnx01.cec.miamioh.edu's password:
+main.cpp                                                                              100%  120     8.7KB/s   00:00
+PS C:\Users\School Wayne\Desktop\Junior Year\CSE278\HW\HW4> scp AirportFinder.cpp chaneyv@ceclnx01.cec.miamioh.edu:~/
+chaneyv@ceclnx01.cec.miamioh.edu's password:
+AirportFinder.cpp                                                                     100% 6087   285.4KB/s   00:00
+PS C:\Users\School Wayne\Desktop\Junior Year\CSE278\HW\HW4> scp AirportFinder.h chaneyv@ceclnx01.cec.miamioh.edu:~/
+chaneyv@ceclnx01.cec.miamioh.edu's password:
+AirportFinder.h                                                                       100%  913    73.2KB/s   00:00
+PS C:\Users\School Wayne\Desktop\Junior Year\CSE278\HW\HW4>
+
+ 
