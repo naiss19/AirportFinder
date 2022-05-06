@@ -1,9 +1,9 @@
-#define LIBSSH_STATIC 1
 #ifndef AIRPORTFINDER_H
 #define AIRPORTFINDER_H
 #include <string>
 #include <iostream>
 #include <istream>
+#include <mysql++/mysql++.h>
 
 using mysqlpp::StoreQueryResult;
 using std::cin;
@@ -31,12 +31,7 @@ public:
     void exitQuery();      // Menu option 5
 
 private:
-    char *username = "hallbd4";
-    char *password = "PGF*zMbvY.u2p.DT";
-    char *serverName = "hallbd4@ceclnx01.cec.miamioh.edu";
     void makeMenu();
-    mysqlpp::Connection myDB = new Connection("cse278", "localhost", username,
-                             password);
 };
 
 #endif

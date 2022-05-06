@@ -3,7 +3,7 @@
 #include <istream>
 #include <iomanip>
 #include <string>
-#include <mysql++.h>
+#include <mysql++/mysql++.h>
 
 using namespace mysqlpp;
 using std::cin;
@@ -57,44 +57,37 @@ void AirportFinder::print(StoreQueryResult outcome)
 // Constructor
 AirportFinder::AirportFinder()
 {
-
-    AirportFinder(username, password);
+    menu();
 }
 
 AirportFinder::AirportFinder(char *username, char *password)
 {
-    this->username = username; // intializing the name
-    this->password = password;
+
 
     // Accessing the miamioh server
     // ----------------------------------------------------------------------------------
 
     // ----------------------------------------------------------------------------------
     // from th SQL1.cpp
-    menu();
+
 
     //===========================================================================
 }
-// Destructor
-AirportFinder::~AirportFinder()
-{
-    //  delete this->AirportFinder;
-    delete username;
-    delete password;
-    delete serverName;
-    cout << "Thank you for using Airport Finder" << endl;
-}
 // Helper functions
-void AirportFinder::getAirport()
-{
-    Query query = myDB.query();
-    mysqlpp::StoreQueryResult outcome = query.store();
-}
-void AirportFinder::sortBy()
-{
-    Query query = myDB.query();
-}
-// Operator overloading
+// void AirportFinder::getAirport()
+// {
+//     mysqlpp::Connection myDB("cse278", "localhost", "cse278",
+//             "wVQABsJFQhwNdNbr");
+//     Query query = myDB.query();
+//     mysqlpp::StoreQueryResult outcome = query.store();
+// }
+// void AirportFinder::sortBy()
+// {
+//     mysqlpp::Connection myDB("cse278", "localhost", "cse278",
+//             "wVQABsJFQhwNdNbr");
+//     Query query = myDB.query();
+// }
+// // Operator overloading
 ofstream &AirportFinder::operator<<(ofstream &is)
 {
 }
@@ -102,7 +95,8 @@ ofstream &AirportFinder::operator<<(ofstream &is)
 // Find airports in Germany by city
 void AirportFinder::germanAirports() // Menu option 1  ONE COLUMN
 {
-
+mysqlpp::Connection myDB("cse278", "localhost", "cse278",
+            "wVQABsJFQhwNdNbr");
     Query query = myDB.query();
     string place;                                                 // city
     cout << "Find airports in Germany by city\n";                 //  print statement
@@ -117,6 +111,8 @@ void AirportFinder::germanAirports() // Menu option 1  ONE COLUMN
 }
 void AirportFinder::twoCriteria() // Menu option 2  TWO COLUMNS
 {
+    mysqlpp::Connection myDB("cse278", "localhost", "cse278",
+            "wVQABsJFQhwNdNbr");
     // show a column here and then ask them to chose from that  suggestion
     Query query = myDB.query();
     string country;
@@ -135,8 +131,8 @@ void AirportFinder::twoCriteria() // Menu option 2  TWO COLUMNS
 }
 void AirportFinder::sumAirports() //  Menu option 3
 {
-    mysqlpp::Connection myDB("cse278", "localhost", username,
-                             password);
+mysqlpp::Connection myDB("cse278", "localhost", "cse278",
+            "wVQABsJFQhwNdNbr");
     Query query = myDB.query();
     query << "SELECT City , COUNT(*) FROM AirportFinder;"; // SQL CODE
     query << "WHERE COUNTRY = 'GERMANY'";                  // SQL CODE second party
@@ -150,8 +146,8 @@ void AirportFinder::sumAirports() //  Menu option 3
 //==================================================================================
 void AirportFinder::groupAirports() //  Menu option 4
 {
-    mysqlpp::Connection myDB("cse278", "localhost", username,
-                             password);
+mysqlpp::Connection myDB("cse278", "localhost", "cse278",
+            "wVQABsJFQhwNdNbr");
     Query query = myDB.query();
     // did not finish will work on it TOMORROW
     query << "SELECT name , COUNT(*) FROM AirportFinder;"; // SQL CODE
