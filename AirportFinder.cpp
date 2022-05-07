@@ -81,7 +81,7 @@ mysqlpp::Connection myDB("cse278", "localhost", "cse278",
     cout << "Find airports in Germany by city\n";                 //  print statement
     cin >> place;                                                 //  city
     query << "SELECT Name FROM Airports";                   // SQL CODE
-    query << "WHERE City LIKE %0p ;"; //  SQL CODE second part
+    query << "WHERE City LIKE " << place << ";"; //  SQL CODE second part
     query.parse();        
     std::cout<<"HERERERERERERRERERERER";                                        // check to ensure query is correct
     // Run the query and get stored results
