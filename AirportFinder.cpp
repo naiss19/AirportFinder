@@ -11,7 +11,7 @@ using std::cin;
 using std::cout;
 using std::endl;
 
-// think you need this 
+// think you need this
 
 // print the DB
 void AirportFinder::print(StoreQueryResult outcome)
@@ -28,7 +28,6 @@ void AirportFinder::print(StoreQueryResult outcome)
     }
 }
 
-
 // Constructor
 AirportFinder::AirportFinder()
 {
@@ -38,16 +37,13 @@ AirportFinder::AirportFinder()
     menu();
 }
 
+// Accessing the miamioh server
+// ----------------------------------------------------------------------------------
 
+// ----------------------------------------------------------------------------------
+// from th SQL1.cpp
 
-    // Accessing the miamioh server
-    // ----------------------------------------------------------------------------------
-
-    // ----------------------------------------------------------------------------------
-    // from th SQL1.cpp
-
-
-    //==========================================================================
+//==========================================================================
 // Helper functions
 // void AirportFinder::getAirport()
 // {
@@ -70,16 +66,16 @@ AirportFinder::AirportFinder()
 // Find airports in Germany by city
 void AirportFinder::germanAirports() // Menu option 1  ONE COLUMN
 {
-mysqlpp::Connection myDB("cse278", "localhost", "cse278",
-            "wVQABsJFQhwNdNbr");
-  mysqlpp::Query query = myDB.query();
+    mysqlpp::Connection myDB("cse278", "localhost", "cse278",
+                             "wVQABsJFQhwNdNbr");
+    mysqlpp::Query query = myDB.query();
 
-
-    string place;                                                 // city
-    cout << "Find airports in Germany by city\n";                 //  print statement
-    cin >> place;                                                 //  city
+    string place;                                 // city
+    cout << "Find airports in Germany by city\n"; //  print statement
+    cout << "Here are some sample cities in Germany: \nBautzen\nAltenburg\nDessau\nEisenhuettenstadt\nSuhl" << endl;
+    cin >> place;                                                                     //  city
     query << "SELECT Name FROM Airports WHERE City = " << quote_only << place << ";"; //  SQL CODE second part
-    query.parse();                                             // check to ensure query is correct
+    query.parse();                                                                    // check to ensure query is correct
     // Run the query and get stored results
     mysqlpp::StoreQueryResult outcome = query.store();
 
@@ -90,22 +86,20 @@ mysqlpp::Connection myDB("cse278", "localhost", "cse278",
 void AirportFinder::twoCriteria() // Menu option 2  TWO COLUMNS
 {
     mysqlpp::Connection myDB("cse278", "localhost", "cse278",
-            "wVQABsJFQhwNdNbr");
+                             "wVQABsJFQhwNdNbr");
     // show a column here and then ask them to chose from that  suggestion
-   mysqlpp:: Query query = myDB.query();
+    mysqlpp::Query query = myDB.query();
     string country;
     string timezone;
     cout << "Please enter a country below" << endl;
-    cout << "Example:\n America\n Canada\n Germany\n" << endl;
-    cin >> country; //use getline to get full input 
+    cout << "Example:\nAmerica\nCanada\nGermany\n"
+         << endl;
+    cin >> country; // use getline to get full input
     cout << "Please enter a time zone below" << endl;
-    cout << "Example: America/Pacific \n Atlantic/Reykjavik" << endl; //  print statement
-
- 
+    cout << "Example:\nAmerica/Pacific\nAtlantic/Reykjavik" << endl; //  print statement
     cin >> timezone;  //  taking in specific airport
-    query << "SELECT Name, City, Latitude, Longitude FROM Airports WHERE Country = " << quote_only << country << " AND Tz = " << quote_only << timezone << ";";
-    // "WHERE Name = %0;";                                           //  SQL CODE second part
-    query.parse();                                                         // check to ensure query is correct
+    query << "SELECT Name, Country, City FROM Airports WHERE Country = " << quote_only << country << "AND Tz = " << quote_only << timezone << "LIMIT 5;";
+    query.parse(); // check to ensure query is correct
     // Run the query and get stored results
     mysqlpp::StoreQueryResult outcome = query.store();
     print(outcome);
@@ -113,31 +107,26 @@ void AirportFinder::twoCriteria() // Menu option 2  TWO COLUMNS
 }
 void AirportFinder::sumAirports() //  Menu option 3
 {
-mysqlpp::Connection myDB("cse278", "localhost", "cse278",
-            "wVQABsJFQhwNdNbr");
+    mysqlpp::Connection myDB("cse278", "localhost", "cse278",
+                             "wVQABsJFQhwNdNbr");
     Query query = myDB.query();
-    query << "SELECT City , COUNT(*) FROM AirportFinder;"; // SQL CODE
-    query << "WHERE COUNTRY = 'GERMANY'";                  // SQL CODE second party
-    query << "GROUP BY City";
+    query << "SELECT City , COUNT(*) FROM Airports WHERE COUNTRY = 'GERMANY' GROUP BY City;";
     query.parse(); // check to ensure query is correct
     // Run the query and get stored results
     mysqlpp::StoreQueryResult outcome = query.store();
+    print(outcome);
 }
-//===================================================================================
-//                  I stopped here
-//==================================================================================
 void AirportFinder::groupAirports() //  Menu option 4
 {
-mysqlpp::Connection myDB("cse278", "localhost", "cse278",
-            "wVQABsJFQhwNdNbr");
+    mysqlpp::Connection myDB("cse278", "localhost", "cse278",
+                             "wVQABsJFQhwNdNbr");
     Query query = myDB.query();
     // did not finish will work on it TOMORROW
-    query << "SELECT name , COUNT(*) FROM AirportFinder;"; // SQL CODE
-    query << "WHERE COUNTRY = 'GERMANY'";                  // SQL CODE second party
-    query << "GROUP BY City";
+    query << "SELECT name , COUNT(*) FROM Airports WHERE COUNTRY = 'GERMANY' GROUP BY City";
     query.parse(); // check to ensure query is correct
     // Run the query and get stored results
     mysqlpp::StoreQueryResult outcome = query.store();
+    print(outcome);
 }
 void AirportFinder::exitQuery() //  Menu option 5
 {
@@ -148,7 +137,7 @@ void AirportFinder::makeMenu()
 {
     cout << "Airport Finder Menu:" << endl;
     cout << "--------------------------------------------------" << endl;
-    cout << "Option 1: Select all airports in the United States by city" << endl;
+    cout << "Option 1: Select all airports in Germany by city" << endl;
     cout << "Option 2: 2 selection criteria" << endl;
     cout << "Option 3: Aggregate function" << endl;
     cout << "Option 4: Summarize using grouping" << endl;
@@ -163,24 +152,24 @@ void AirportFinder::menu()
     switch (userInput)
     {
     case 1:
-    
-     AirportFinder::germanAirports();
+
+        AirportFinder::germanAirports();
         break;
     case 2:
-       AirportFinder::twoCriteria();
+        AirportFinder::twoCriteria();
         break;
     case 3:
-      AirportFinder::sumAirports();
+        AirportFinder::sumAirports();
         break;
     case 4:
-       AirportFinder::groupAirports();
+        AirportFinder::groupAirports();
         break;
     case 5:
         AirportFinder::exitQuery();
         break;
     default:
         cout << "Please choose another number" << endl;
-       AirportFinder::menu();
+        AirportFinder::menu();
         break;
     }
 }
