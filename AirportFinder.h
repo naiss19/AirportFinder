@@ -26,7 +26,7 @@ public:
     void twoCriteria();    // Menu option 2
     void sumAirports();    // Menu option 3
     void groupAirports();  // Menu option 4
-    void exitQuery();      // Menu option 5
+    int exitQuery();      // Menu option 5
 
 private:
     void makeMenu();

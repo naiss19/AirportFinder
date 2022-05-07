@@ -128,9 +128,9 @@ void AirportFinder::groupAirports() //  Menu option 4
     mysqlpp::StoreQueryResult outcome = query.store();
     print(outcome);
 }
-void AirportFinder::exitQuery() //  Menu option 5
+int AirportFinder::exitQuery() //  Menu option 5
 {
-    return;
+    return 0;
 }
 
 void AirportFinder::makeMenu()
