@@ -79,8 +79,7 @@ mysqlpp::Connection myDB("cse278", "localhost", "cse278",
     cout << "Find airports in Germany by city\n";                 //  print statement
     cin >> place;                                                 //  city
     query << "SELECT Name FROM Airports WHERE City = " << quote_only << place << ";"; //  SQL CODE second part
-    query.parse();        
-    std::cout<<"HERERERERERERRERERERER";                                        // check to ensure query is correct
+    query.parse();                                             // check to ensure query is correct
     // Run the query and get stored results
     mysqlpp::StoreQueryResult outcome = query.store();
 
@@ -96,16 +95,20 @@ void AirportFinder::twoCriteria() // Menu option 2  TWO COLUMNS
    mysqlpp:: Query query = myDB.query();
     string country;
     string timezone;
-    cout << "Enter a country and time zone\n";
-    cout << "Example: America America/Pacific \n      Iceland Atlantic/Reykjavik" << endl; //  print statement
-    cin >> country; //use getline to get full input     
+    cout << "Please enter a country below" << endl;
+    cout << "Example:\n America\n Canada\n Germany\n" << endl;
+    cin >> country; //use getline to get full input 
+    cout << "Please enter a time zone below" << endl;
+    cout << "Example: America/Pacific \n Atlantic/Reykjavik" << endl; //  print statement
+
+ 
     cin >> timezone;  //  taking in specific airport
-    query << "SELECT Name, City, Latitude, Longitude FROM AirportFinder WHERE Country = " << country << " AND Tz = " << timezone << ";";
+    query << "SELECT Name, City, Latitude, Longitude FROM Airports WHERE Country = " << quote_only << country << " AND Tz = " << quote_only << timezone << ";";
     // "WHERE Name = %0;";                                           //  SQL CODE second part
     query.parse();                                                         // check to ensure query is correct
     // Run the query and get stored results
     mysqlpp::StoreQueryResult outcome = query.store();
-
+    print(outcome);
     /// need to make method to only print 2 column NOW
 }
 void AirportFinder::sumAirports() //  Menu option 3
