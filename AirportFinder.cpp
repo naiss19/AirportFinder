@@ -37,9 +37,7 @@ AirportFinder::AirportFinder()
     //         "wVQABsJFQhwNdNbr");
     // menu();
 }
-AirportFinder::~AirportFinder()
-{
-}
+
 
 
     // Accessing the miamioh server
