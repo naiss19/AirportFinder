@@ -5,6 +5,6 @@
 int main(int argc, char const *argv[])
 {
     AirportFinder a;
-    a.menu();
+    // a.menu();
     return 0;
 }

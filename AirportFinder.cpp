@@ -35,7 +35,7 @@ AirportFinder::AirportFinder()
     // this->AirportFinder = AirportFinder;
     //  this-> myDB = mysqlpp::Connection("cse278", "localhost", "cse278",
     //         "wVQABsJFQhwNdNbr");
-    // menu();
+    menu();
 }
 
 
