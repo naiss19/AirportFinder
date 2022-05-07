@@ -78,8 +78,7 @@ mysqlpp::Connection myDB("cse278", "localhost", "cse278",
     string place;                                                 // city
     cout << "Find airports in Germany by city\n";                 //  print statement
     cin >> place;                                                 //  city
-    query << "SELECT Name FROM Airports";                   // SQL CODE
-    query << "WHERE City LIKE " << place << ";"; //  SQL CODE second part
+    query << "SELECT Name FROM Airports WHERE City = " << quote_only << place << ";"; //  SQL CODE second part
     query.parse();        
     std::cout<<"HERERERERERERRERERERER";                                        // check to ensure query is correct
     // Run the query and get stored results
@@ -156,7 +155,7 @@ void AirportFinder::menu()
 {
     int userInput;
     cout << "Choose an item from the menu" << endl;
-    AirportFinder::makeMenu();
+    makeMenu();
     cin >> userInput;
     switch (userInput)
     {
